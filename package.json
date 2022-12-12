@@ -1,0 +1,34 @@
+{
+    "name": "adventofcode-2022",
+    "version": "0.0.1",
+    "author": "Robert Barthold",
+    "description": "adventofcode-2022 in typescript",
+    "contributors": [],
+    "private": true,
+    "main": "src/index.ts",
+    "scripts": {
+        "start": "ts-node src/index.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rooboo/adventofcode.git"
+    },
+    "keywords": [],
+
+    "license": "MIT",
+    "dependencies": {
+        "ts-node": "10.9.1"
+    },
+    "devDependencies": {
+        "@types/node": "18.11.13",
+        "@typescript-eslint/eslint-plugin": "5.46.1",
+        "@typescript-eslint/parser": "5.46.1",
+        "eslint": "8.29.0",
+        "eslint-config-prettier": "8.5.0",
+        "eslint-import-resolver-typescript": "3.5.2",
+        "eslint-plugin-import": "2.26.0",
+        "eslint-plugin-prettier": "4.2.1",
+        "prettier": "2.8.1",
+        "typescript": "4.9.4"
+    }
+}
