@@ -1,9 +1,7 @@
-import * as fs from 'fs';
+import getInput from './getInput';
 
 export default function solveDay1() {
-  const elfdataFile = 'res/1.input.txt';
-  const elfDatas: string = fs.readFileSync(elfdataFile, 'utf-8');
-  const lines = elfDatas.split(/\r?\n/);
+  const lines = getInput(1);
 
   type Elf = {
     position: number;
