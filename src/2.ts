@@ -5,43 +5,76 @@ export default function solveDay2() {
   let scoreQ2 = 0;
   const lines = getInput(2);
 
-  type Shape = 'A' | 'B' | 'C' | 'X' | 'Y' | 'Z';
+  type Shape = 'ROCK' | 'PAPER' | 'SCISSORS';
   type Game = {
     p: Shape;
     o: Shape;
   };
+
   interface ShapeCombination {
     [key: string]: Shape;
   }
+
   const shapeValue = {
-    A: 1,
-    X: 1,
-    B: 2,
-    Y: 2,
-    C: 3,
-    Z: 3,
+    ROCK: 1,
+    PAPER: 2,
+    SCISSORS: 3,
   };
   const winningShapes: ShapeCombination = {
-    A: 'B',
-    X: 'B',
-    B: 'C',
-    Y: 'C',
-    C: 'A',
-    Z: 'A',
+    ROCK: 'PAPER',
+    PAPER: 'SCISSORS',
+    SCISSORS: 'ROCK',
   };
   const loosingShapes: ShapeCombination = {
-    A: 'C',
-    X: 'C',
-    B: 'A',
-    Y: 'A',
-    C: 'B',
-    Z: 'B',
+    ROCK: 'SCISSORS',
+    PAPER: 'ROCK',
+    SCISSORS: 'PAPER',
   };
+
+  function toShape(shape: string): Shape {
+    switch (shape) {
+      case 'A':
+      case 'X':
+        return 'ROCK';
+      case 'B':
+      case 'Y':
+        return 'PAPER';
+      case 'C':
+      case 'Z':
+        return 'SCISSORS';
+      default:
+        throw new Error('Illegal shape value ' + shape);
+    }
+  }
+
+  function calculateScore1({ o, p }: Game): number {
+    if (p === o) {
+      return 3 + shapeValue[p];
+    } else if (p === 'ROCK' && o === 'SCISSORS') {
+      return 6 + shapeValue[p];
+    } else if (p === 'PAPER' && o === 'ROCK') {
+      return 6 + shapeValue[p];
+    } else if (p === 'SCISSORS' && o === 'PAPER') {
+      return 6 + shapeValue[p];
+    }
+    return shapeValue[p];
+  }
+
+  function calculateScore2({ o, p }: Game): number {
+    if (p === 'ROCK') {
+      return shapeValue[loosingShapes[o]]; // loose
+    } else if (p === 'PAPER') {
+      return 3 + shapeValue[o]; // draw
+    } else if (p === 'SCISSORS') {
+      return 6 + shapeValue[winningShapes[o]]; // win
+    }
+    return 0;
+  }
 
   lines.forEach((line) => {
     if (line.length > 0) {
       const gameStr = line.split(' ');
-      const game: Game = { p: <Shape>gameStr[1], o: <Shape>gameStr[0] };
+      const game: Game = { p: toShape(gameStr[1]), o: toShape(gameStr[0]) };
       // calculate score for question 1
       scoreQ1 += calculateScore1(game);
       // calculate score for question 2
@@ -51,41 +84,4 @@ export default function solveDay2() {
 
   console.log('Q1: score is', scoreQ1);
   console.log('Q2: score is', scoreQ2);
-
-  function convertPlayer(shape: Shape): Shape {
-    switch (shape) {
-      case 'X':
-        return 'A';
-      case 'Y':
-        return 'B';
-      case 'Z':
-        return 'C';
-      default:
-        return shape;
-    }
-  }
-
-  function calculateScore1({ o, p }: Game): number {
-    if (convertPlayer(p) === o) {
-      return 3 + shapeValue[p];
-    } else if (p === 'X' && o === 'C') {
-      return 6 + shapeValue[p];
-    } else if (p === 'Y' && o === 'A') {
-      return 6 + shapeValue[p];
-    } else if (p === 'Z' && o === 'B') {
-      return 6 + shapeValue[p];
-    }
-    return shapeValue[p];
-  }
-
-  function calculateScore2({ o, p }: Game): number {
-    if (p === 'X') {
-      return shapeValue[loosingShapes[o]]; // loose
-    } else if (p === 'Y') {
-      return 3 + shapeValue[o]; // draw
-    } else if (p === 'Z') {
-      return 6 + shapeValue[winningShapes[o]]; // win
-    }
-    return 0;
-  }
 }
