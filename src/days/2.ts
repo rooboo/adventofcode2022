@@ -1,4 +1,4 @@
-import getInput from './getInput';
+import getInput from '../getInput';
 
 export default async function solveDay2() {
   let scoreQ1 = 0;

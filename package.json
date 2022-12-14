@@ -7,7 +7,7 @@
     "private": true,
     "main": "src/index.ts",
     "scripts": {
-        "start": "ts-node src/index.ts"
+        "start": "ts-node src/index.ts \"3\""
     },
     "repository": {
         "type": "git",
