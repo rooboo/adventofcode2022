@@ -8,7 +8,7 @@ import fs from 'fs';
  * @param day
  */
 export default async function getInput(day: number): Promise<string[]> {
-  const file = `res/${day}.input.txt`;
+  const file = `res/${day}.txt`;
   try {
     const data = await fs.promises.readFile(file, 'utf-8');
     return data.split(/\r?\n/);
