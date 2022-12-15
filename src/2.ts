@@ -1,9 +1,9 @@
 import getInput from './getInput';
 
-export default function solveDay2() {
+export default async function solveDay2() {
   let scoreQ1 = 0;
   let scoreQ2 = 0;
-  const lines = getInput(2);
+  const lines = await getInput(2);
 
   type Shape = 'ROCK' | 'PAPER' | 'SCISSORS';
   type Game = {
@@ -82,6 +82,7 @@ export default function solveDay2() {
     }
   });
 
+  console.log('Solutions for day 2:');
   console.log('Q1: score is', scoreQ1);
   console.log('Q2: score is', scoreQ2);
 }

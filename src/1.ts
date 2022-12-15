@@ -1,7 +1,7 @@
 import getInput from './getInput';
 
-export default function solveDay1() {
-  const lines = getInput(1);
+export default async function solveDay1() {
+  const lines = await getInput(1);
 
   type Elf = {
     position: number;
@@ -22,11 +22,11 @@ export default function solveDay1() {
 
   elves.sort((first, second) => first.calories - second.calories);
 
+  console.log('Solutions for day 1:');
   const q1Elf = elves[elves.length - 1];
   if (q1Elf !== undefined) {
     console.log('Q1: Biggest calories:', q1Elf.calories);
   }
-
   console.log(
     'Q2: Sum of calories of TOP 3:',
     elves.slice(elves.length - 3).reduce((sum, current) => sum + current.calories, 0),
